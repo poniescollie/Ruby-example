@@ -1,0 +1,52 @@
+class Task
+  attr_accessor :description, :completed
+
+  def initialize(description)
+    @description = description
+    @completed = false
+  end
+
+  def complete
+    @completed = true
+    puts "Task '#{description}' marked as completed."
+  end
+end
+
+class TaskList
+  def initialize
+    @tasks = []
+  end
+
+  def add_task(task)
+    @tasks << task
+    puts "Task '#{task.description}' added to the task list."
+  end
+
+  def display_tasks
+    if @tasks.empty?
+      puts "Task list is empty."
+    else
+      puts "Task List:"
+      @tasks.each_with_index do |task, index|
+        status = task.completed ? "Completed" : "Incomplete"
+        puts "#{index + 1}. #{task.description} (#{status})"
+      end
+    end
+  end
+end
+
+# Example usage
+task1 = Task.new("Write Ruby code")
+task2 = Task.new("Learn a new language")
+task3 = Task.new("Exercise")
+
+task_list = TaskList.new
+
+task_list.add_task(task1)
+task_list.add_task(task2)
+task_list.add_task(task3)
+
+task_list.display_tasks
+
+task1.complete
+task_list.display_tasks
